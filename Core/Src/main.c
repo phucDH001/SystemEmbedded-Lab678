@@ -27,17 +27,11 @@
 #include "usart.h"
 #include "gpio.h"
 #include "fsmc.h"
+#include "uart.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "software_timer.h"
-#include "led_7seg.h"
-#include "button.h"
-#include "lcd.h"
-#include "picture.h"
-#include "ds3231.h"
-#include "sensor.h"
-#include "buzzer.h"
+#include "lab6.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -63,10 +57,7 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-void system_init();
-void test_LedDebug();
-void test_Buzzer();
-void test_Adc();
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -111,20 +102,15 @@ int main(void)
   MX_ADC1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  system_init();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
- lcd_Clear(BLACK);
+  lab6_init();
   while (1)
   {
-	  while(!flag_timer2);
-	  flag_timer2 = 0;
-	  button_Scan();
-	  test_LedDebug();
-	  test_Adc();
-	  test_Buzzer();
+	  lab6_run();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -177,80 +163,11 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void system_init(){
-	  timer_init();
-	  button_init();
-	  lcd_init();
-	  sensor_init();
-	  buzzer_init();
-	  setTimer2(50);
-}
-
-uint8_t count_led_debug = 0;
-
-void test_LedDebug(){
-	count_led_debug = (count_led_debug + 1)%20;
-	if(count_led_debug == 0){
-		HAL_GPIO_TogglePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin);
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+	if(htim->Instance == TIM2){
+		timerRun();
+		led7_Scan();
 	}
-}
-
-uint8_t isButtonUp()
-{
-    if (button_count[3] == 1)
-        return 1;
-    else
-        return 0;
-}
-
-uint8_t isButtonDown()
-{
-    if (button_count[7] == 1)
-        return 1;
-    else
-        return 0;
-}
-
-uint8_t isButtonRight()
-{
-    if (button_count[11] == 1)
-        return 1;
-    else
-        return 0;
-}
-
-uint8_t count_adc = 0;
-
-void test_Adc(){
-	count_adc = (count_adc + 1)%20;
-	if(count_adc == 0){
-		sensor_Read();
-		lcd_ShowStr(10, 100, "Voltage:", RED, BLACK, 16, 0);
-		lcd_ShowFloatNum(130, 100,sensor_GetVoltage(), 4, RED, BLACK, 16);
-		lcd_ShowStr(10, 120, "Current:", RED, BLACK, 16, 0);
-		lcd_ShowFloatNum(130, 120,sensor_GetCurrent(), 4, RED, BLACK, 16);
-		lcd_ShowStr(10, 140, "Light:", RED, BLACK, 16, 0);
-		lcd_ShowIntNum(130, 140, sensor_GetLight(), 4, RED, BLACK, 16);
-		lcd_ShowStr(10, 160, "Potentiometer:", RED, BLACK, 16, 0);
-		lcd_ShowIntNum(130, 160, sensor_GetPotentiometer(), 4, RED, BLACK, 16);
-		lcd_ShowStr(10, 180, "Temperature:", RED, BLACK, 16, 0);
-		lcd_ShowFloatNum(130, 180,sensor_GetTemperature(), 4, RED, BLACK, 16);
-	}
-}
-
-void test_Buzzer(){
-	if(isButtonUp()){
-		buzzer_SetVolume(50);
-	}
-
-	if(isButtonDown()){
-		buzzer_SetVolume(0);
-	}
-
-	if(isButtonRight()){
-		buzzer_SetVolume(25);
-	}
-
 }
 /* USER CODE END 4 */
 

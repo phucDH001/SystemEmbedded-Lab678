@@ -1,0 +1,8 @@
+uart.c:15:6:uart_init_rs232	8	static
+uart.c:26:6:uart_Rs232SendString	16	static
+uart.c:34:6:uart_Rs232SendBytes	16	static
+uart.c:42:6:uart_Rs232SendNum	24	static
+uart.c:53:6:uart_Rs232SendNumPercent	24	static
+uart.c:60:6:HAL_UART_RxCpltCallback	16	static
+uart.c:74:6:resetBuffer	16	static
+uart.c:81:6:fsm_uart	4	static

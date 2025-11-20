@@ -46,9 +46,10 @@ void led7_Scan(){
 }
 
 void led7_SetDigit(int num, int position, uint8_t show_dot){
-	if(num >= 0 && num <= 9){
+	if (num == -1)
+		led7seg[position] = 0xff;
+	else if (num >= 0 && num <= 9)
 		led7seg[position] = arrayOfNum[num] - show_dot;
-	}
 }
 
 void led7_SetColon(uint8_t status){

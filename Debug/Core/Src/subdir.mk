@@ -13,6 +13,7 @@ C_SRCS += \
 ../Core/Src/fsmc.c \
 ../Core/Src/gpio.c \
 ../Core/Src/i2c.c \
+../Core/Src/lab6.c \
 ../Core/Src/lcd.c \
 ../Core/Src/led_7seg.c \
 ../Core/Src/main.c \
@@ -26,6 +27,7 @@ C_SRCS += \
 ../Core/Src/sysmem.c \
 ../Core/Src/system_stm32f4xx.c \
 ../Core/Src/tim.c \
+../Core/Src/uart.c \
 ../Core/Src/usart.c \
 ../Core/Src/utils.c 
 
@@ -38,6 +40,7 @@ OBJS += \
 ./Core/Src/fsmc.o \
 ./Core/Src/gpio.o \
 ./Core/Src/i2c.o \
+./Core/Src/lab6.o \
 ./Core/Src/lcd.o \
 ./Core/Src/led_7seg.o \
 ./Core/Src/main.o \
@@ -51,6 +54,7 @@ OBJS += \
 ./Core/Src/sysmem.o \
 ./Core/Src/system_stm32f4xx.o \
 ./Core/Src/tim.o \
+./Core/Src/uart.o \
 ./Core/Src/usart.o \
 ./Core/Src/utils.o 
 
@@ -63,6 +67,7 @@ C_DEPS += \
 ./Core/Src/fsmc.d \
 ./Core/Src/gpio.d \
 ./Core/Src/i2c.d \
+./Core/Src/lab6.d \
 ./Core/Src/lcd.d \
 ./Core/Src/led_7seg.d \
 ./Core/Src/main.d \
@@ -76,6 +81,7 @@ C_DEPS += \
 ./Core/Src/sysmem.d \
 ./Core/Src/system_stm32f4xx.d \
 ./Core/Src/tim.d \
+./Core/Src/uart.d \
 ./Core/Src/usart.d \
 ./Core/Src/utils.d 
 
