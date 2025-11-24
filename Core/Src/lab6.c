@@ -57,9 +57,16 @@ void task_adc() {
         lcd_ShowStr(170, 50, "*C", WHITE, BLACK, 16, 0);
 
         humi = sensor_GetPotentiometer() / 4095.0 * 100.0;
-        lcd_ShowStr(30, 70, "Humidity:", WHITE, BLACK, 16, 0);
-        lcd_ShowFloatNum(130, 70, humi, 4, WHITE, BLACK, 16);
-        lcd_ShowStr(170, 70, "%", WHITE, BLACK, 16, 0);
+        if (humi > 70) {
+			lcd_ShowStr(30, 70, "Humidity:", RED, BLACK, 16, 0);
+			lcd_ShowFloatNum(130, 70, humi, 4, RED, BLACK, 16);
+			lcd_ShowStr(170, 70, "%", RED, BLACK, 16, 0);
+        }
+        else {
+			lcd_ShowStr(30, 70, "Humidity:", WHITE, BLACK, 16, 0);
+			lcd_ShowFloatNum(130, 70, humi, 4, WHITE, BLACK, 16);
+			lcd_ShowStr(170, 70, "%", WHITE, BLACK, 16, 0);
+        }
     }
 }
 
@@ -96,55 +103,37 @@ void task_update_led7() {
 static uint16_t g_current_x = CHART_X_START;
 static uint16_t g_last_y = CHART_Y_END;
 static uint16_t scale_power_to_y() {
-    // 1. Kẹp giá trị (đảm bảo nó nằm trong khoảng min/max)
+	// Converts a raw power value into a Y-coordinate for the display
     if (power < POWER_MIN) power = POWER_MIN;
     if (power > POWER_MAX) power = POWER_MAX;
-    // 2. Tính toán tỉ lệ (dùng 'long' để tránh tràn số khi nhân)
-    // (power - MIN) / (MAX - MIN) -> Tỉ lệ 0.0 -> 1.0
-    // Tỉ lệ * CHART_HEIGHT -> số pixel offset từ dưới lên
     long y_offset = ((long)(power - POWER_MIN) * CHART_HEIGHT) / (POWER_MAX - POWER_MIN);
-    // 3. Trả về tọa độ Y
-    // (Lưu ý: Tọa độ Y của LCD_0 ở trên cùng, nên ta phải lấy Y_max trừ đi offset)
     return CHART_Y_END - (uint16_t)y_offset;
 }
 
 void chart_init() {
-    // 1. Vẽ tiêu đề
+	// Initializes the visual layout of the chart
     lcd_ShowStr(90, CHART_Y_START - 20, "Power Consumption", YELLOW, BLACK, 16, 0);
-    // 2. Vẽ khung chữ nhật cho biểu đồ
     lcd_DrawRectangle(CHART_X_START - 5, CHART_Y_START, CHART_X_END - 5, CHART_Y_END, WHITE);
-    // 3. Vẽ nhãn cho trục Y (giá trị Max và Min)
-    // Dùng lcd_ShowIntNum để hiển thị số
     lcd_ShowStr(5, CHART_Y_START - 20, "70000", WHITE, BLACK, 16, 0);
     lcd_ShowStr(10, CHART_Y_END - 16, "0", WHITE, BLACK, 16, 0);
-    // 4. Reset lại vị trí vẽ
     g_current_x = CHART_X_START;
     g_last_y = CHART_Y_END;
-    // 5. Xóa sạch vùng vẽ bên trong để chuẩn bị
     lcd_Fill(CHART_X_START - 5 + 1, CHART_Y_START + 1, CHART_X_END - 5 - 1, CHART_Y_END, BLACK);
 }
 
-
 void task_chart_update() {
-    // 1. Chuyển đổi giá trị power sang tọa độ Y
+	// Updates the real-time graph with a new data point
     uint16_t new_y = scale_power_to_y();
-    // 2. Kiểm tra xem đã vẽ đến hết cạnh phải chưa
+    // If the graph reaches the right edge of the screen, it clears the chart area and resets the drawing position
     if (g_current_x >= CHART_X_END - 10) {
-        // Đã hết, quay lại từ đầu (kiểu oscilloscope)
         g_current_x = CHART_X_START;
-        // Xóa vùng vẽ bên trong
         lcd_Fill(CHART_X_START - 5 + 1, CHART_Y_START + 1, CHART_X_END - 5 - 1, CHART_Y_END, BLACK);
         lcd_DrawRectangle(CHART_X_START - 5, CHART_Y_START, CHART_X_END - 5, CHART_Y_END, WHITE);
-        // Vẽ điểm đầu tiên của lần quét mới
         lcd_DrawPoint(g_current_x, new_y, GREEN);
     }
     else {
-        // 2a. Vẽ đường thẳng từ điểm cũ (g_current_x, g_last_y)
-        //     đến điểm mới (g_current_x + 1, new_y)
         lcd_DrawLine(g_current_x, g_last_y, g_current_x + 1, new_y, GREEN);
-        // 2b. Tăng tọa độ X lên 1 pixel cho lần vẽ sau
         g_current_x++;
     }
-    // 3. Lưu lại tọa độ Y này cho lần lặp tiếp theo
     g_last_y = new_y;
 }
