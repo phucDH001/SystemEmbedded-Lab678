@@ -36,7 +36,12 @@ Core/Src/uart.o: ../Core/Src/uart.c ../Core/Inc/uart.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/utils.h
+ ../Core/Inc/utils.h ../Core/Inc/lab8.h ../Core/Inc/software_timer.h \
+ ../Core/Inc/tim.h ../Core/Inc/led_7seg.h ../Core/Inc/spi.h \
+ ../Core/Inc/button.h ../Core/Inc/gpio.h ../Core/Inc/lcd.h \
+ ../Core/Inc/picture.h ../Core/Inc/ds3231.h ../Core/Inc/i2c.h \
+ ../Core/Inc/sensor.h ../Core/Inc/adc.h ../Core/Inc/buzzer.h \
+ ../Core/Inc/uart.h
 
 ../Core/Inc/uart.h:
 
@@ -117,3 +122,33 @@ Core/Src/uart.o: ../Core/Src/uart.c ../Core/Inc/uart.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
 ../Core/Inc/utils.h:
+
+../Core/Inc/lab8.h:
+
+../Core/Inc/software_timer.h:
+
+../Core/Inc/tim.h:
+
+../Core/Inc/led_7seg.h:
+
+../Core/Inc/spi.h:
+
+../Core/Inc/button.h:
+
+../Core/Inc/gpio.h:
+
+../Core/Inc/lcd.h:
+
+../Core/Inc/picture.h:
+
+../Core/Inc/ds3231.h:
+
+../Core/Inc/i2c.h:
+
+../Core/Inc/sensor.h:
+
+../Core/Inc/adc.h:
+
+../Core/Inc/buzzer.h:
+
+../Core/Inc/uart.h:

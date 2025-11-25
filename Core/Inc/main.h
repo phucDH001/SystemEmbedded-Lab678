@@ -66,6 +66,10 @@ void Error_Handler(void);
 #define OUTPUT_Y1_GPIO_Port GPIOE
 #define FSMC_RES_Pin GPIO_PIN_13
 #define FSMC_RES_GPIO_Port GPIOC
+#define ESP12_BUSY_Pin GPIO_PIN_9
+#define ESP12_BUSY_GPIO_Port GPIOF
+#define ESP12_PWR_Pin GPIO_PIN_10
+#define ESP12_PWR_GPIO_Port GPIOF
 #define INPUT_X0_Pin GPIO_PIN_6
 #define INPUT_X0_GPIO_Port GPIOA
 #define INPUT_X1_Pin GPIO_PIN_7

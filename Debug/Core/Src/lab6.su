@@ -6,5 +6,5 @@ lab6.c:76:6:task_buzzer	8	static
 lab6.c:89:6:toggle_colon	8	static
 lab6.c:94:6:task_update_led7	8	static
 lab6.c:105:17:scale_power_to_y	16	static
-lab6.c:118:6:chart_init	24	static
-lab6.c:134:6:task_chart_update	32	static
+lab6.c:113:6:chart_init	24	static
+lab6.c:124:6:task_chart_update	32	static

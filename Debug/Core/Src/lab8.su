@@ -1,0 +1,5 @@
+lab8.c:4:6:lab8_init	8	static
+lab8.c:16:6:lab8_run	8	static
+lab8.c:30:6:lightProcess	8	static
+lab8.c:44:6:test_Esp	24	static
+lab8.c:49:6:sendTemperature	56	static

@@ -1,4 +1,4 @@
-Core/Src/lab6.o: ../Core/Src/lab6.c ../Core/Inc/lab6.h \
+Core/Src/lab8.o: ../Core/Src/lab8.c ../Core/Inc/lab8.h \
  ../Core/Inc/software_timer.h ../Core/Inc/tim.h ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
@@ -42,7 +42,7 @@ Core/Src/lab6.o: ../Core/Src/lab6.c ../Core/Inc/lab6.h \
  ../Core/Inc/sensor.h ../Core/Inc/adc.h ../Core/Inc/buzzer.h \
  ../Core/Inc/uart.h ../Core/Inc/usart.h ../Core/Inc/lab8.h
 
-../Core/Inc/lab6.h:
+../Core/Inc/lab8.h:
 
 ../Core/Inc/software_timer.h:
 

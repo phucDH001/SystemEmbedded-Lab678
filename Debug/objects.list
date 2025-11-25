@@ -7,6 +7,7 @@
 "./Core/Src/gpio.o"
 "./Core/Src/i2c.o"
 "./Core/Src/lab6.o"
+"./Core/Src/lab8.o"
 "./Core/Src/lcd.o"
 "./Core/Src/led_7seg.o"
 "./Core/Src/main.o"

@@ -27,11 +27,9 @@
 #include "usart.h"
 #include "gpio.h"
 #include "fsmc.h"
-#include "uart.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "lab6.h"
+#include "lab8.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -101,16 +99,17 @@ int main(void)
   MX_DMA_Init();
   MX_ADC1_Init();
   MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  lab6_init();
+  lab8_init();
   while (1)
   {
-	  lab6_run();
+	  lab8_run();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

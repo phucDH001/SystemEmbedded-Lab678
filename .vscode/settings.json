@@ -10,6 +10,8 @@
         "software_timer.h": "c",
         "button.h": "c",
         "lab3.h": "c",
-        "ds3231.h": "c"
+        "ds3231.h": "c",
+        "picture.h": "c",
+        "uart.h": "c"
     }
 }

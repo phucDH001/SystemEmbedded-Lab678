@@ -77,7 +77,7 @@ void task_buzzer() {
     if (humi > 70.0) {
         if (alert_state) {
         	buzzer_SetVolume(50);
-        	uart_Rs232SendString("Humidity exceeds threshold!!!\n");
+        	uart_Rs232SendString(&ctx_uart1, "Humidity exceeds threshold!!!\n");
         }
         else buzzer_SetVolume(0);
         alert_state = 1 - alert_state;
